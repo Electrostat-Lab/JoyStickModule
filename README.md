@@ -31,6 +31,6 @@ dependencies {
 
 ### MCP3008 MicroChip ADC(Analog~Digital Converter) datasheet :
 
-![](https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/MCP3008.pdf)
+https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/MCP3008.pdf
 
 
