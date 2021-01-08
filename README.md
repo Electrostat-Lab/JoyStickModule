@@ -14,7 +14,7 @@ allprojects {
 
 ```gradle
 dependencies {
-	        implementation 'com.github.Scrappers-glitch:JoystickModule:1.0'
+	        implementation 'com.github.Scrappers-glitch:JoystickModule:1.0.1R'
 	}
 ```
 
