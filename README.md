@@ -41,6 +41,8 @@ https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/joyst
 
 https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/MCP3008.pdf
 
+### If you need to know more about MCP3008 at MicroChip : 
 
+https://www.microchip.com/wwwproducts/en/en010530#additional-features
 
 
