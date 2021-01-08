@@ -7,6 +7,8 @@ import com.pi4j.io.spi.SpiChannel;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 
 public class JoystickModule {
     private OnForwardListener onForwardListener;
@@ -20,8 +22,9 @@ public class JoystickModule {
     private GpioController gpioController;
     private MCP3008GpioProvider mcp3008GpioProvider;
     private GpioPinDigitalInput gpioPinDigitalInput;
-    public enum Channels {CH_0,CH_1,CH_2}
-
+    public enum Channels {CH_0,CH_1,CH_2,CH_3,CH_4,CH_5,CH_6,CH_7}
+    private static final int tolerance=40;
+    private static final int neutralizeState=512;
 
     public JoystickModule(SpiChannel rpIchipSelect){
         this.rpIchipSelect=rpIchipSelect;
@@ -40,15 +43,29 @@ public class JoystickModule {
             case CH_2:
                 inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider, MCP3008Pin.CH2,"Channel2"));
                 break;
+            case CH_3:
+                inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider, MCP3008Pin.CH3,"Channel3"));
+                break;
+            case CH_4:
+                inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider, MCP3008Pin.CH4,"Channel4"));
+                break;
+            case CH_5:
+                inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider, MCP3008Pin.CH5,"Channel5"));
+                break;
+            case CH_6:
+                inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider, MCP3008Pin.CH6,"Channel6"));
+                break;
+            case CH_7:
+                inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider, MCP3008Pin.CH7,"Channel7"));
+                break;
         }
     }
     public void registerAllChannels(){
         if(gpioController==null || mcp3008GpioProvider==null){
             throw new ModuleNotActiveException("Module not active or not initialized");
         }
-        for(Pin pin : MCP3008Pin.ALL){
-            inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider,pin,pin.getAddress()+""));
-        }
+        LinkedList<Pin> mcp3008Pins= (LinkedList<Pin>) Arrays.asList(MCP3008Pin.ALL);
+        mcp3008Pins.forEach(pin -> inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider,pin,pin.getAddress()+"")));
     }
     public void initializeModule(double thresholdAnalogValue,Pin SW_Pin) throws IOException {
         gpioController= GpioFactory.getInstance();
@@ -58,31 +75,31 @@ public class JoystickModule {
         gpioPinDigitalInput=gpioController.provisionDigitalInputPin(SW_Pin);
 
     }
-    private void startCollectingChannelsData(){
+    public void startCollectingChannelsData(){
         if(gpioController==null || mcp3008GpioProvider==null){
             throw new ModuleNotActiveException("Module not active or not initialized");
         }
         gpioController.addListener((GpioPinListenerAnalog) event -> {
             double valueY=mcp3008GpioProvider.getValue(MCP3008Pin.CH0);
             double valueX=mcp3008GpioProvider.getValue(MCP3008Pin.CH1);
-            int tolerance=40;
+
             /*512+40=552*/
-            if(valueY>(512+tolerance)){
+            if(valueY>(neutralizeState+tolerance)){
                onForwardListener.forward((float) valueY/100f);
             }
             /*512-40=472*/
-            if(valueY<(512-tolerance)){
+            if(valueY<(neutralizeState-tolerance)){
                 onBackwardListener.backward((float)valueY/100f);
             }
-            if(valueX>(512+tolerance)){
+            if(valueX>(neutralizeState+tolerance)){
                 steerLTListener.steerLT((float) (valueX/100f));
             }
-            if(valueX<(512-tolerance)){
+            if(valueX<(neutralizeState-tolerance)){
                 steerRTListener.steerRT((float)valueX/100f);
             }
-            if((valueY>(512-tolerance) && valueY<(512+tolerance))
+            if((valueY>(neutralizeState-tolerance) && valueY<(neutralizeState+tolerance))
                     &&
-                    (valueX>(512-tolerance) && valueX<(512+tolerance))){
+                    (valueX>(neutralizeState-tolerance) && valueX<(neutralizeState+tolerance))){
                 neutralizeListener.neutralize((float) valueX/100f, (float) (valueY/100f));
             }
             System.out.println("Vx : "+valueX);
