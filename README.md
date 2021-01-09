@@ -69,6 +69,10 @@ pi@raspberrypi:~ $ gpio readall
 
 https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/joystick_module.pdf
 
+### MCP3008 Channel & Communication Pins :
+
+![](https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/mcp3008pins.png)
+
 ### MCP3008 MicroChip ADC(Analog~Digital Converter) datasheet :
 
 https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/MCP3008.pdf
