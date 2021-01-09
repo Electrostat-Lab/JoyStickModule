@@ -26,6 +26,8 @@ public class JoystickModule {
     public enum Channels {CH_0,CH_1,CH_2,CH_3,CH_4,CH_5,CH_6,CH_7}
     private static final int tolerance=40;
     private static final int neutralizeState=512;
+    private Pin VxPin;
+    private Pin VyPin;
 
     public JoystickModule(SpiChannel rpIchipSelect){
         this.rpIchipSelect=rpIchipSelect;
@@ -58,6 +60,79 @@ public class JoystickModule {
                 break;
             case CH_7:
                 inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider, MCP3008Pin.CH7,"Channel7"));
+                break;
+        }
+    }
+
+    private void setVxPin(Pin vxPin) {
+        VxPin = vxPin;
+    }
+
+    private Pin getVxPin() {
+        return VxPin;
+    }
+
+    public void setVyPin(Pin vyPin) {
+        VyPin = vyPin;
+    }
+
+    public Pin getVyPin() {
+        return VyPin;
+    }
+
+    public void registerVx(Channels channel){
+        switch (channel){
+            case CH_0:
+                setVxPin(MCP3008Pin.CH0);
+                break;
+            case CH_1:
+                setVxPin(MCP3008Pin.CH1);
+                break;
+            case CH_2:
+                setVxPin(MCP3008Pin.CH2);
+                break;
+            case CH_3:
+                setVxPin(MCP3008Pin.CH3);
+                break;
+            case CH_4:
+                setVxPin(MCP3008Pin.CH4);
+                break;
+            case CH_5:
+                setVxPin(MCP3008Pin.CH5);
+                break;
+            case CH_6:
+                setVxPin(MCP3008Pin.CH6);
+                break;
+            case CH_7:
+                setVxPin(MCP3008Pin.CH7);
+                break;
+        }
+    }
+    public void registerVy(Channels channel){
+        switch (channel){
+            case CH_0:
+                setVyPin(MCP3008Pin.CH0);
+                break;
+            case CH_1:
+                setVyPin(MCP3008Pin.CH1);
+                break;
+            case CH_2:
+                setVyPin(MCP3008Pin.CH2);
+                break;
+            case CH_3:
+                setVyPin(MCP3008Pin.CH3);
+                break;
+            case CH_4:
+                setVyPin(MCP3008Pin.CH4);
+                break;
+            case CH_5:
+                setVyPin(MCP3008Pin.CH5);
+                break;
+            case CH_6:
+                setVyPin(MCP3008Pin.CH6);
+                break;
+            case CH_7:
+                setVyPin(MCP3008Pin.CH7);
                 break;
         }
     }
@@ -99,26 +174,25 @@ public class JoystickModule {
         });
 
         gpioController.addListener((GpioPinListenerAnalog) event -> {
-
-            double valueY=mcp3008GpioProvider.getValue(MCP3008Pin.CH0);
-            double valueX=mcp3008GpioProvider.getValue(MCP3008Pin.CH1);
+            double valueX=mcp3008GpioProvider.getValue(getVxPin());
+            double valueY=mcp3008GpioProvider.getValue(getVyPin());
 
             /*512+40=552*/
-            if(valueY>(neutralizeState+tolerance)){
-               onForwardListener.forward((float) valueY/100f);
+            if(valueX>(neutralizeState+tolerance)){
+               onForwardListener.forward((float) valueX/100f);
             }
             /*512-40=472*/
-            if(valueY<(neutralizeState-tolerance)){
-                onBackwardListener.backward((float)valueY/100f);
-            }
-            if(valueX>(neutralizeState+tolerance)){
-                steerRTListener.steerRT((float) (valueX/100f));
-            }
             if(valueX<(neutralizeState-tolerance)){
+                onBackwardListener.backward((float)valueX/100f);
+            }
+            if(valueY>(neutralizeState+tolerance)){
+                steerRTListener.steerRT((float) (valueY/100f));
+            }
+            if(valueY<(neutralizeState-tolerance)){
                 if(valueX<=0){
                     valueX=100f;
                 }
-                steerLTListener.steerLT((float)valueX/50f);
+                steerLTListener.steerLT((float)valueY/50f);
             }
             if((valueY>(neutralizeState-tolerance) && valueY<(neutralizeState+tolerance))
                     &&
@@ -136,16 +210,16 @@ public class JoystickModule {
 
     }
     public interface OnForwardListener{
-        void forward(float valueY);
+        void forward(float valueX);
     }
     public interface OnBackwardListener{
-        void backward(float valueY);
+        void backward(float valueX);
     }
     public interface SteerRTListener {
-        void steerRT(float valueX);
+        void steerRT(float valueY);
     }
     public interface SteerLTListener {
-        void steerLT(float valueX);
+        void steerLT(float valueY);
     }
     public interface NeutralizeListener{
         void neutralize(float valueX,float valueY);
