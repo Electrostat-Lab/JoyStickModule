@@ -81,7 +81,9 @@ public class JoystickModule {
         mcp3008GpioProvider.setEventThreshold(thresholdAnalogValue, gpioPinAnalogInput);
         mcp3008GpioProvider.setMonitorEnabled(true);
         mcp3008GpioProvider.setMonitorInterval(250);
-        gpioPinDigitalInput=gpioController.provisionDigitalInputPin(SW_Pin);
+        gpioPinDigitalInput=gpioController.provisionDigitalInputPin(SW_Pin,PinPullResistance.PULL_DOWN);
+        gpioPinDigitalInput.setShutdownOptions(true);
+
     }
     public void startCollectingChannelsData(){
         if(gpioController==null || mcp3008GpioProvider==null){
