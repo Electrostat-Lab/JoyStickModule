@@ -85,7 +85,17 @@ public class JoystickModule {
         if(gpioController==null || mcp3008GpioProvider==null){
             throw new ModuleNotActiveException("Module not active or not initialized");
         }
+
+        GpioPinAnalogInput[] gpioPinAnalogInput= new GpioPinAnalogInput[inputChannels.size()];
+        /*a way of making the var of the number a final value to be used anonymously & to change it at the same time*/
+        final int[] position = {0};
+        inputChannels.forEach(channel->{
+            gpioPinAnalogInput[position[0]]= channel;
+            position[0] +=1;
+        });
+
         gpioController.addListener((GpioPinListenerAnalog) event -> {
+
             double valueY=mcp3008GpioProvider.getValue(MCP3008Pin.CH0);
             double valueX=mcp3008GpioProvider.getValue(MCP3008Pin.CH1);
 
@@ -110,7 +120,7 @@ public class JoystickModule {
             }
             System.out.println("Vx : "+valueX);
             System.out.println("Vy : "+valueY);
-        }, (GpioPinInput[]) inputChannels.toArray());
+        }, gpioPinAnalogInput);
 
         gpioPinDigitalInput.addListener((GpioPinListenerDigital) event -> {
             System.out.println("Vz = "+event.getState());
