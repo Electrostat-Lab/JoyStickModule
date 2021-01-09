@@ -2,6 +2,7 @@
   <dictionary name="twisted">
     <words>
       <w>datasheet</w>
+      <w>gpio</w>
       <w>ichip</w>
     </words>
   </dictionary>

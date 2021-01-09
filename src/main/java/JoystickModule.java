@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 public class JoystickModule {
     private OnForwardListener onForwardListener;
@@ -70,10 +71,15 @@ public class JoystickModule {
     public void initializeModule(double thresholdAnalogValue,Pin SW_Pin) throws IOException {
         gpioController= GpioFactory.getInstance();
         mcp3008GpioProvider=new MCP3008GpioProvider(rpIchipSelect);
-        mcp3008GpioProvider.setEventThreshold(thresholdAnalogValue, (GpioPinAnalogInput[]) inputChannels.toArray());
-
+        GpioPinAnalogInput[] gpioPinAnalogInput= new GpioPinAnalogInput[inputChannels.size()];
+        /*a way of making the var of the number a final value to be used anonymously & to change it at the same time*/
+        final int[] position = {0};
+        inputChannels.forEach(channel->{
+            gpioPinAnalogInput[position[0]]= channel;
+            position[0] +=1;
+        });
+        mcp3008GpioProvider.setEventThreshold(thresholdAnalogValue, gpioPinAnalogInput);
         gpioPinDigitalInput=gpioController.provisionDigitalInputPin(SW_Pin);
-
     }
     public void startCollectingChannelsData(){
         if(gpioController==null || mcp3008GpioProvider==null){
