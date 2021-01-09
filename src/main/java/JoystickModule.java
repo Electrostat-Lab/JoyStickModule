@@ -113,6 +113,9 @@ public class JoystickModule {
                 steerRTListener.steerRT((float) (valueX/100f));
             }
             if(valueX<(neutralizeState-tolerance)){
+                if(valueX<=0){
+                    valueX=100f;
+                }
                 steerLTListener.steerLT((float)valueX/50f);
             }
             if((valueY>(neutralizeState-tolerance) && valueY<(neutralizeState+tolerance))
