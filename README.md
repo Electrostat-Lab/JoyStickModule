@@ -115,3 +115,6 @@ SW(switch button pin) -> GPIO7 or pin7 for digital input ( i think you can still
 
 ![](https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/IMG_20210109_145230.jpg)
 
+### Video of Operation :
+
+https://youtu.be/9ZvhFQSwHF0
