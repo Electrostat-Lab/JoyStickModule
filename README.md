@@ -107,8 +107,8 @@ SW(switch button pin) -> GPIO7 or pin7 for digital input ( i think you can still
 ```
 ### start writing your code , but first implement it through gradle , then : 
 
-# [CodeExample]
-```
+# [CodeExample using jme Vehicles]
+```java
 
 import com.jme3.app.SimpleApplication;
 import com.jme3.asset.AssetManager;
