@@ -164,7 +164,9 @@ public class JoystickModule {
         if(gpioController==null || mcp3008GpioProvider==null){
             throw new ModuleNotActiveException("Module not active or not initialized");
         }
-
+        if(getVxPin()==null || getVyPin()==null){
+            throw new ConfigurationException("Please Register MCP3008 input Channels w/ the JoyStick module Vx & Vy");
+        }
         GpioPinAnalogInput[] gpioPinAnalogInput= new GpioPinAnalogInput[inputChannels.size()];
         /*a way of making the var of the number a final value to be used anonymously & to change it at the same time*/
         final int[] position = {0};
@@ -172,7 +174,6 @@ public class JoystickModule {
             gpioPinAnalogInput[position[0]]= channel;
             position[0] +=1;
         });
-
         gpioController.addListener((GpioPinListenerAnalog) event -> {
             double valueX=mcp3008GpioProvider.getValue(getVxPin());
             double valueY=mcp3008GpioProvider.getValue(getVyPin());
