@@ -79,6 +79,8 @@ public class JoystickModule {
             position[0] +=1;
         });
         mcp3008GpioProvider.setEventThreshold(thresholdAnalogValue, gpioPinAnalogInput);
+        mcp3008GpioProvider.setMonitorEnabled(true);
+        mcp3008GpioProvider.setMonitorInterval(250);
         gpioPinDigitalInput=gpioController.provisionDigitalInputPin(SW_Pin);
     }
     public void startCollectingChannelsData(){
@@ -108,10 +110,10 @@ public class JoystickModule {
                 onBackwardListener.backward((float)valueY/100f);
             }
             if(valueX>(neutralizeState+tolerance)){
-                steerLTListener.steerLT((float) (valueX/100f));
+                steerRTListener.steerRT((float) (valueX/100f));
             }
             if(valueX<(neutralizeState-tolerance)){
-                steerRTListener.steerRT((float)valueX/100f);
+                steerLTListener.steerLT((float)valueX/50f);
             }
             if((valueY>(neutralizeState-tolerance) && valueY<(neutralizeState+tolerance))
                     &&
