@@ -214,58 +214,7 @@ public class JmeGame extends SimpleApplication implements ActionListener {
         joystickModule.startCollectingChannelsData();
 
     }
-    @Override
-    public void onAction(String binding, boolean value, float tpf) {
-        if (binding.equals("Lefts")) {
-            if (value) {
-                steeringValue += .5f;
-            } else {
-                steeringValue += -.5f;
-            }
-            vehicle.steer(steeringValue);
-        } else if (binding.equals("Rights")) {
-            if (value) {
-                steeringValue += -.5f;
-            } else {
-                steeringValue += .5f;
-            }
-            vehicle.steer(steeringValue);
-        } else if (binding.equals("Ups")) {
-            if (value) {
-                accelerationValue += accelerationForce;
-            } else {
-                accelerationValue -= accelerationForce;
-            }
-            vehicle.accelerate(accelerationValue);
-        } else if (binding.equals("Downs")) {
-            if (value) {
-                vehicle.brake(brakeForce);
-            } else {
-                vehicle.brake(0f);
-            }
-        } else if (binding.equals("Space")) {
-            if (value) {
-                vehicle.applyImpulse(jumpForce, Vector3f.ZERO);
-            }
-        } else if (binding.equals("Reset")) {
-            if (value) {
-                System.out.println("Reset");
-                vehicle.setPhysicsLocation(Vector3f.ZERO);
-                vehicle.setPhysicsRotation(new Matrix3f());
-                vehicle.setLinearVelocity(Vector3f.ZERO);
-                vehicle.setAngularVelocity(Vector3f.ZERO);
-                vehicle.resetSuspension();
-            } else {
-            }
-        }
-    }
-
-    @Override
-    public void destroy() {
-        super.destroy();
-        /* deInitializeSensor Service on app exit , to be used with other apps */
-    }
-
+    @
     private void addSky() {
         Geometry sky = (Geometry) SkyFactory.createSky(assetManager,assetManager.loadTexture("RocketLeauge/assets/Textures/sky.jpg"),Vector3f.UNIT_XYZ, SkyFactory.EnvMapType.EquirectMap);
         sky.getMaterial().getAdditionalRenderState().setDepthFunc(RenderState.TestFunction.LessOrEqual);
