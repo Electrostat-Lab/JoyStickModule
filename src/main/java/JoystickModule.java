@@ -143,7 +143,7 @@ public class JoystickModule {
         LinkedList<Pin> mcp3008Pins= (LinkedList<Pin>) Arrays.asList(MCP3008Pin.ALL);
         mcp3008Pins.forEach(pin -> inputChannels.add(gpioController.provisionAnalogInputPin(mcp3008GpioProvider,pin,pin.getAddress()+"")));
     }
-    public void initializeModule(double thresholdAnalogValue,Pin SW_Pin) throws IOException {
+    public void initializeModule(double thresholdAnalogValue,Pin SW_Pin,PinPullResistance pullResistance) throws IOException {
         gpioController= GpioFactory.getInstance();
         mcp3008GpioProvider=new MCP3008GpioProvider(rpIchipSelect);
         GpioPinAnalogInput[] gpioPinAnalogInput= new GpioPinAnalogInput[inputChannels.size()];
@@ -156,7 +156,7 @@ public class JoystickModule {
         mcp3008GpioProvider.setEventThreshold(thresholdAnalogValue, gpioPinAnalogInput);
         mcp3008GpioProvider.setMonitorEnabled(true);
         mcp3008GpioProvider.setMonitorInterval(250);
-        gpioPinDigitalInput=gpioController.provisionDigitalInputPin(SW_Pin,PinPullResistance.PULL_DOWN);
+        gpioPinDigitalInput=gpioController.provisionDigitalInputPin(SW_Pin,pullResistance);
         gpioPinDigitalInput.setShutdownOptions(true);
 
     }
