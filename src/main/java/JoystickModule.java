@@ -187,7 +187,7 @@ public class JoystickModule {
                 if(valueX<=0){
                     valueX=100f;
                 }
-                onBackwardListener.backward((float)valueX/100f);
+                onBackwardListener.backward((float)valueX/50f);
             }
             if(valueY>(neutralizeState+tolerance)){
                 steerRTListener.steerRT((float) (valueY/100f));
