@@ -81,4 +81,7 @@ https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/MCP30
 
 https://www.microchip.com/wwwproducts/en/en010530#additional-features
 
+### A photo for the Breadboard circuit :
+
+![](https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/IMG_20210109_145230.jpg)
 
