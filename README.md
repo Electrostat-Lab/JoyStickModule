@@ -81,6 +81,36 @@ https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/MCP30
 
 https://www.microchip.com/wwwproducts/en/en010530#additional-features
 
+### So , Generally do like this : 
+
+```
+VDD(driving device) -> 3v3 source.
+Vref(reference voltage) -> 3v3 source.
+AGND(Analog ground for closed circuit during analogRead transmission) -> GND.
+CLK -> SCLK pin of the SPI0 , GPIO14 or physical pin 23 of PI4.
+DOUT(the converted digital out of the MCP3008) -> MISO0(Master-in slave-out) of the SPI0 , GPIO13 or physical pin 21 of PI4.
+DIN(Digital input from the PI4, for MCP3008 channels configuration as PI4 digitalOut) -> MOSI0(Master-out slave-in) of the SPI0 , GPIO12 or physical pin 19.
+CS/SHDN(Chip Select or Chip Enable : used to select which SPI to enable as PI4b has 4 SPIs) -> CE0(Chip enable 0) , GPIO10 or physical pin 24 to enable SPI0.
+DGND(Digital ground for closing circuit during digitalOut transmission) -> GND.
+
+```
+
+### Then on the joystick module there are 5 pins : 
+
+```
+GND -> GND 
++5v -> 5v0 or 3v3 source (it's tested in both cases)
+VRx -> CH0 or CH1 or CH2 or CH3 or CH4 or CH5 or CH6 or CH7 according to your code setup but it should differs from VRy
+VRy -> CH0 or CH1 or CH2 or CH3 or CH4 or CH5 or CH6 or CH7 according to your code setup but it should differs from VRx
+SW(switch button pin) -> GPIO7 or pin7 for digital input ( i think you can still use MCP3008 channels as digitalInputs too with provisionDigitalInput(Pin) code setup , try it & tell e if it works :-) ). 
+
+```
+### start writing your code , but first implement it through gradle , then : 
+
+# [CodeExample]
+```
+```
+
 ### A photo for the Breadboard circuit :
 
 ![](https://github.com/Scrappers-glitch/JoyStickModule/blob/master/Attachments/IMG_20210109_145230.jpg)
