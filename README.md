@@ -83,7 +83,7 @@ https://www.microchip.com/wwwproducts/en/en010530#additional-features
 
 ### So , Generally do like this : 
 
-```
+```bash
 VDD(driving device) -> 3v3 source.
 Vref(reference voltage) -> 3v3 source.
 AGND(Analog ground for closed circuit during analogRead transmission) -> GND.
@@ -97,7 +97,7 @@ DGND(Digital ground for closing circuit during digitalOut transmission) -> GND.
 
 ### Then on the joystick module there are 5 pins : 
 
-```
+```bash
 GND -> GND 
 +5v -> 5v0 or 3v3 source (it's tested in both cases)
 VRx -> CH0 or CH1 or CH2 or CH3 or CH4 or CH5 or CH6 or CH7 according to your code setup but it should differs from VRy
