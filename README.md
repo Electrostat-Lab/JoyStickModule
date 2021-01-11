@@ -24,7 +24,7 @@ Since , RPIs got no analog I/O pins , you cannot get direct analog mappings usin
 
 In order to find the wiringPI pins(wPi column on right & Left for RT & LT pins) on your device :
 
-```
+```bash
 pi@raspberrypi:~ $ gpio readall
  +-----+-----+---------+------+---+---Pi 4B--+---+------+---------+-----+-----+
  | BCM | wPi |   Name  | Mode | V | Physical | V | Mode | Name    | wPi | BCM |
