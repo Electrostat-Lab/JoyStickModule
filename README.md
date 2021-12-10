@@ -123,7 +123,6 @@ https://youtu.be/9ZvhFQSwHF0
 - JMonkeyEngine : https://jmonkeyengine.org/docs/
 - Test `JoyStickModule` lib : https://github.com/Scrappers-glitch/JmeCarPhysicsTestRPI
 - SPI (Serial Peripheral Interface) : https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi/all
-
  				      https://en.wikipedia.org/wiki/Serial_Peripheral_Interface
 - MCP3008 ADC : https://www.microchip.com/en-us/product/MCP3008
 
