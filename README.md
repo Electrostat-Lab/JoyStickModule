@@ -114,12 +114,19 @@ SW(switch button pin) -> GPIO7 or pin7 for digital input ( i think you can still
 
 https://youtu.be/9ZvhFQSwHF0
 
+-----------------------------------------------------------------------------------------------------------
+
 ### More at : 
 - Pi4j Examples : https://github.com/Scrappers-glitch/pi4j-v1/tree/master/pi4j-example/src/main/java
 - wPi Examples : https://github.com/WiringPi/WiringPi/tree/master/examples
 - Raspberry Pi : https://www.raspberrypi.com/documentation/computers/raspberry-pi.html
 - JMonkeyEngine : https://jmonkeyengine.org/docs/
 - Test `JoyStickModule` lib : https://github.com/Scrappers-glitch/JmeCarPhysicsTestRPI
+- SPI (Serial Peripheral Interface) : https://learn.sparkfun.com/tutorials/serial-peripheral-interface-spi/all
+
+ 				      https://en.wikipedia.org/wiki/Serial_Peripheral_Interface
+- MCP3008 ADC : https://www.microchip.com/en-us/product/MCP3008
+
 ### Empric References :
 - General electronics : https://www.electronics-tutorials.ws/combination/analogue-to-digital-converter.html
 - RPI intoduced by oracle press thro pi4j1.4 : https://eg1lib.org/book/5173454/11911d
