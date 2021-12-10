@@ -126,7 +126,7 @@ https://youtu.be/9ZvhFQSwHF0
  				      https://en.wikipedia.org/wiki/Serial_Peripheral_Interface
 - MCP3008 ADC : https://www.microchip.com/en-us/product/MCP3008
 
-### Empric References :
+### General References :
 - General electronics : https://www.electronics-tutorials.ws/combination/analogue-to-digital-converter.html
 - RPI intoduced by oracle press thro pi4j1.4 : https://eg1lib.org/book/5173454/11911d
 - Pi4J website and docs : https://pi4j.com/1.4/example/control.html 
