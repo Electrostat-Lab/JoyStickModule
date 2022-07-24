@@ -1,4 +1,4 @@
-# JoyStickModule
+# <img src="https://user-images.githubusercontent.com/60224159/180644772-63823efd-f2cf-4d13-bef5-03c92c784d52.svg" width="65" height="85"> JoyStickModule
 
 [![](https://jitpack.io/v/Scrappers-glitch/JoystickModule.svg)](https://jitpack.io/#Scrappers-glitch/JoystickModule)
 
